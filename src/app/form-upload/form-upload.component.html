@@ -1,0 +1,17 @@
+<div *ngIf="uploadService.currentFileUpload" class="progress">
+  <div class="progress-bar progress-bar-info progress-bar-striped"
+       role="progressbar" attr.aria-valuenow="{{uploadService.progress.percentage}}"
+       aria-valuemin="0" aria-valuemax="100"
+       [ngStyle]="{width:uploadService.progress.percentage+'%'}">
+    {{uploadService.progress.percentage}}%
+  </div>
+</div>
+
+<button class="btn wht pull-left" style="margin:10px;padding:10px;">
+  <input class="wht" type="file" (change)="selectFile($event)">
+</button>
+
+<button class="btn wht" style="margin:10px;padding:10px;" [disabled]="!uploadService.selectedFiles"
+	(click)="uploadService.upload()">Upload</button>
+<!--<span class="mr-10" role="button" [disabled]="!selectedFiles"
+	(click)="upload()">Application Dashboard</span>-->
