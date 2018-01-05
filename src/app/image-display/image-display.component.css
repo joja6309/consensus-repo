@@ -1,3 +1,8 @@
+.selected
+{
+  background-color:none;
+}
+
 .dropzone {
   /*min-height: 400px;
   min-width: 400px;
@@ -5,21 +10,23 @@
   width: 100%;
   background-color: #eee;
   border: dotted 1px #aaa;*/
+  
+  
   -webkit-align-items: center;
   align-items: center;
-  background-color: rgba(255,255,255,0.3);
+  /*background-color: rgba(255,255,255,0.3);*/
   color:white;
   cursor: pointer;
   display: -webkit-flex;
   display: flex;
-  height:150px;
-  /*height: 300px;*/
+  height: 300px;
   -webkit-justify-content: center;
   justify-content: center;
   outline: 3px dashed #ccc;
   outline-offset: 5px;
   position: relative;
-  
+  width: 500px;
+
 
 }
 
@@ -34,6 +41,3 @@
   font-weight: bold;
   text-align:center;
 }
-
-
-

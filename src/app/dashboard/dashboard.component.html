@@ -1,24 +1,47 @@
+
 <div class="banner-area">
+
 
   <div class="container">
     
     <h1 class="text-center text-white text-uppercase" style="margin-top:100px;">Application Dashboard</h1>
     <hr />
-    <div class="banner-content text-center">
-      <div class="col-12" style="margin:10px;padding:10px;">
-        <list-upload class="pull-left" style="margin-left:40px;padding:5px;"></list-upload>
-        <form-upload class="pull-right" ></form-upload>
+
+    
+
+    <div class="banner-content" style="padding-bottom:10px;">
+      <div class="col-md-4 pull-left">
+        <form-upload style="margin-bottom:10px;" ></form-upload> 
         <app-dnd></app-dnd>
+        <button class="btn upload-btn" [disabled]="!uploadService.showUploadButton"
+        (click)="uploadService.upload()">Upload
+        </button>
+       
+      <!-- <div *ngIf="uploadService.showProgressBar" class="progress">
+        <div class="progress-bar progress-bar-info progress-bar-striped"
+             role="progressbar" attr.aria-valuenow="{{uploadService.progress.percentage}}"
+             aria-valuemin="0" aria-valuemax="100"
+             [ngStyle]="{width:uploadService.progress.percentage+'%'}">
+          {{uploadService.progress.percentage}}%
+        </div>
+      </div> -->
 
-        
       </div>
-
-
-    </div>
-    <div class="row justify-content-center height align-items-center">
-      <div class="align-content-lg-center">
+      <div class="col-md-8 pull-right" style="margin-bottom:40px;">
+         
+        <app-image-display></app-image-display>
+        <button class="btn upload-btn" [disabled]="!imageSelected"
+         (click)="open()">Run Algorithm on this Image!
+      </button>
+      
       </div>
+      </div>
+      <div class="col-md-12 scroll">
+         <a *ngFor="let img of images; let i = index" (click)="selectImg(i)">
+          <img class="img-size" [src]="img.url">
+        </a>
     </div>
   </div>
 </div>
+
 

@@ -6,9 +6,10 @@ import { UploadFileService } from '../upload-file.service';
   selector: '[appDnd]'
 })
 export class DndDirective {
-  @Input() private allowed_extensions : Array<string> = [];
+  // @Input() private allowed_extensions : Array<string> = [];
+  // @Output() private filesInvalidEmiter: EventEmitter<File[]> = new EventEmitter();
+  
   @Output() private filesChangeEmiter : EventEmitter<FileList> = new EventEmitter();
-  @Output() private filesInvalidEmiter : EventEmitter<File[]> = new EventEmitter();
   @HostBinding('style.background') private background = 'rgba(255,255,255,0.3)';
 
   constructor(private uploadService: UploadFileService) { }
@@ -29,22 +30,10 @@ export class DndDirective {
     evt.preventDefault();
     evt.stopPropagation();
     this.background = 'rgba(255,255,255,0.3)'
-    let files = evt.dataTransfer.files;
-    let valid_files: Array<File> = [];
-    let invalid_files : Array<File> = [];
-    if (files.length > 0) {
-     for (let file of files){
-        let ext = file.name.split('.')[file.name.split('.').length - 1];
-        if(this.allowed_extensions.lastIndexOf(ext) != -1){
-          valid_files.push(file);
-        }else{
-          invalid_files.push(file);
-        }
-      };
-      this.uploadService.currentFileUpload = valid_files[0];
-      //this.filesChangeEmiter.emit(valid_files);
-      //this.filesInvalidEmiter.emit(invalid_files);
+    this.uploadService.currentFileUpload = evt.dataTransfer.files.item(0);
+    this.uploadService.showUploadButton = true;
+    
     }
   }
 
-}
+

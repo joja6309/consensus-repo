@@ -1,0 +1,39 @@
+.example-h2 {
+  
+  margin-bottom:45px;
+  font-size:15px;
+}
+
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.example-margin {
+  margin: 0px;
+}
+
+.mat-slider-horizontal {
+  width: 200px;
+}
+
+.mat-slider-vertical {
+  height: 300px;
+}
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+body { 
+  font-family: Roboto, Arial, sans-serif;
+  margin: 0;
+}
+
+.basic-container {
+  padding: 5px;
+}
+
+.version-info {
+  font-size: 8pt;
+  float: right;
+}

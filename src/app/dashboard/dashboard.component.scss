@@ -1,0 +1,131 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+ .modal-custom-lg .modal-dialog {
+    width: 95%;
+    height: 90vh;
+    max-width: none;
+}
+.modal-custom-lg .modal-content {
+    width: 95%;
+    height: 95vh;
+    max-width: none;
+}
+.ui.menu .item img.logo {
+    margin-right: 1.5em;
+}
+.list-group-item{
+  overflow: hidden;
+}
+.ui.items>.item {
+  border: 1px solid rgba(255, 255, 255, 0.0);
+  border-radius: 5px;
+}
+
+.ui.items>.item.selected {
+  border: 1px solid rgba(163, 51, 200, 0.41);
+  border-radius: 5px;
+}
+
+.ui.items>.item>.content>.header {
+    padding-top: 1em;
+}
+
+.products-list {
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+
+
+.product-row {
+  border-bottom: 1px solid black;
+}
+
+.product-image {
+  float: left;
+}
+
+.product-info {
+  padding: 30px;
+  float: left;
+}
+
+.price-display {
+  padding: 30px;
+  float: right;
+}
+
+.product-image {
+  width: 100px;
+  height: 100px;
+  padding: 20px;
+}
+
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+cf {
+    *zoom: 1;
+}
+
+
+
+.col-top
+{
+  padding:0px 0px 10px 5px;
+  margin:0px;
+
+}
+.scroll
+{
+  display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+}
+
+.img-size
+{
+  height:20%;
+  width:15%;
+  padding:5px;
+}
+.text-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+.progress
+{
+  margin-top:20px;
+  
+}
+.centered {
+  font-family: sans-serif;
+  font-size: 1.3em;
+  font-weight: bold;
+  text-align:center;
+}
+.upload-btn
+{
+  margin-top:30px;
+  -webkit-align-items: center;
+  align-items: center;
+  background-color: rgba(255,255,255,0.3);
+  color:white;
+  cursor: pointer;
+  display: -webkit-flex;
+  display: flex;
+  height: 50px;
+  -webkit-justify-content: center;
+  justify-content: center;
+  /*outline: 3px dashed #ccc;
+  outline-offset: 5px;*/
+  position: relative;
+  
+}

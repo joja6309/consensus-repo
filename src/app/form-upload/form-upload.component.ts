@@ -9,9 +9,7 @@ import { UploadFileService } from '../upload-file.service';
 })
 export class FormUploadComponent implements OnInit {
 
-  selectedFiles: FileList
-  currentFileUpload: File
-  progress: { percentage: number } = { percentage: 0 }
+  
 
   constructor(private uploadService: UploadFileService) { }
 
@@ -19,7 +17,12 @@ export class FormUploadComponent implements OnInit {
   }
 
   selectFile(event) {
-    this.uploadService.selectedFiles = event.target.file;
+    // this.uploadService.selectedFiles = event.target.file;
+    console.log(event.target.files.item(0));
+    
+    this.uploadService.currentFileUpload = event.target.files.item(0);
+    this.uploadService.showUploadButton = true;
+
   }
 
  

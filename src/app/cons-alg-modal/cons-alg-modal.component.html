@@ -1,0 +1,26 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{name.name}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-sm-6">
+      <img class="img-size" [src]="name.url">
+    </div>
+    <div class="col-sm-6">
+      <canvas #myCanvas id="cnv" width="300" height="300">
+      </canvas>
+      <canvas #layout></canvas>
+    </div>
+  </div>
+</div>
+<div class="modal-footer cust-footer">
+  <div>
+    <app-slider #mySlider (rowChangeEmitter)="rowChangeHandler($event)" 
+                (colChangeEmitter)="colChangeHandler($event)">
+        </app-slider>
+      </div>
+      <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+    </div>

@@ -9,15 +9,9 @@ import { UploadFileService } from '../upload-file.service';
 export class DndComponent {
   private fileList : any = [];
   private invalidFiles : any = [];
-  constructor(private uploadService: UploadFileService) { }
+  
+  constructor(private uploadService: UploadFileService) {  }
 
-  onFilesChange(fileList : FileList){
-    this.uploadService.selectedFiles = fileList;
-    console.log(fileList);
-  }
-
-  onFileInvalids(fileList : Array<File>){
-    this.invalidFiles = fileList;
-  }
-
+  
 }
+

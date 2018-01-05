@@ -16,21 +16,21 @@ export class ListUploadComponent implements OnInit {
   constructor(private uploadService: UploadFileService) { }
 
   ngOnInit() {
-    this.fileUploads = this.uploadService.getFiles();
+    // this.fileUploads = this.uploadService.getFiles();
   }
 
   refreshFiles(enable: boolean) {
    
-      this.fileUploads = this.uploadService.getFiles();
+      // this.fileUploads = this.uploadService.getFiles();
     
   }
 
-  showFiles(enable: boolean) {
-    this.showFile = enable
+  // showFiles(enable: boolean) {
+  //   this.showFile = enable
 
-    if (enable) {
-      this.fileUploads = this.uploadService.getFiles();
-    }
-  }
+  //   if (enable) {
+  //     this.fileUploads = this.uploadService.getFiles();
+  //   }
+  // }
  
 }

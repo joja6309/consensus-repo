@@ -1,0 +1,32 @@
+<mat-card>
+  <mat-card-content>
+    <h2 class="example-h2">Grid Configuration</h2>
+ <section class="example-section">
+    
+  <div class="col-md-3">
+    <mat-form-field class="example-margin">
+      <input matInput type="number" placeholder="Rows" [(ngModel)]="row_value" (ngModelChange)="row_change($event)">
+    </mat-form-field>
+    <mat-slider class="example-margin" thumbLabel tickInterval="auto" [(ngModel)]="row_value" (ngModelChange)="row_change($event)">
+    </mat-slider>
+  </div>
+  <div class="col-md-3">
+    <mat-form-field class="example-margin">
+      <input matInput type="number" placeholder="Columns" [(ngModel)]="column_value" (ngModelChange)="col_change($event)">
+
+    </mat-form-field>
+    <mat-slider class="example-margin" thumbLabel tickInterval="auto" [(ngModel)]="column_value" (ngModelChange)="col_change($event)">
+    </mat-slider>
+   
+  </div>
+</section>
+
+
+
+  </mat-card-content>
+</mat-card>
+
+
+<!-- Copyright 2017 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->
