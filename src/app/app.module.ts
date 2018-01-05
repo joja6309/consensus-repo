@@ -13,9 +13,9 @@ import { UploadFileService } from './upload-file.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ImageDisplayComponent } from './image-display/image-display.component';
 import { DndModule } from 'ng2-dnd';
-// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdModalContent } from './cons-alg-modal/cons-alg-modal.component';
-// import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SliderComponent } from './slider/slider.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -77,7 +77,7 @@ import {
     AppRoutingModule,
     HttpClientModule,
     DndModule.forRoot(),
-    // NgbModule.forRoot(),
+     NgbModule.forRoot(),
     MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,
