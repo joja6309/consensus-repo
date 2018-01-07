@@ -1,0 +1,19 @@
+<!--<input type="text" placeholder="Filter Images" value="{{imageSettings.filterQuery}}" (keyup)="onKeyUp($event)">-->
+<div class="image-list" id="style-1">
+    <div class="image-container" *ngFor="let img of (imageSettings.images | indexOf : ['name', 'tags'] : imageSettings.filterQuery);">
+        <img class="image pointer shadow" [src]="processImgUrl(img.url)" [alt]="img.name" [ngClass]="{ selected: img.uniqueId === imageSettings.selectedImageUniqueId }" selectable (isSelectedChange)="onIsSelectedChange(img.uniqueId)">
+    </div>
+</div>
+
+<hr>
+
+<div class="upload-file-container" style=" margin-left:10px;">
+  <label class="btn btn-default btn-style shadow">
+    Upload Image <input type="file" hidden>
+  </label>
+      <!--<input type="file" class="in-wht" (change)="onSelectFileChange($event)" title="Upload File" placeholder="Upload File" />-->
+      <!--<input type="file" name="file" id="file" class="inputfile" />
+      <label for="file">Choose a file</label>-->
+      <!--<div class="btn btn-block btn-lg text-center wht">
+      </div>-->
+  </div>

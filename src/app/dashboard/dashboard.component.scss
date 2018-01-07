@@ -83,6 +83,26 @@ cf {
   margin:0px;
 
 }
+input[type=file] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  margin-top: 30px;
+  -webkit-align-items: center;
+  align-items: center;
+  background-color: rgba(255,255,255,0.3);
+  color: white;
+  cursor: pointer;
+  display: -webkit-flex;
+  display: flex;
+  height: 10px;
+  -webkit-justify-content: center;
+  justify-content: center;
+  outline: 3px dashed #ccc;
+  outline-offset: 5px;
+  position: relative;
+}
 .scroll
 {
   display: block;
@@ -111,6 +131,17 @@ cf {
   font-weight: bold;
   text-align:center;
 }
+.shadow {
+  -webkit-box-shadow: 0px 6px 15px 0px rgba(50, 50, 50, 0.3);
+  -moz-box-shadow: 0px 6px 15px 0px rgba(50, 50, 50, 0.3);
+  box-shadow: 0px 6px 15px 0px rgba(50, 50, 50, 0.3);
+  border-radius: 0.25rem;
+}
+.btn-style {
+  color: white;
+  border: 1px solid #ccc;
+  background-color: #ccc;
+}
 .upload-btn
 {
   margin-top:30px;
@@ -128,4 +159,8 @@ cf {
   outline-offset: 5px;*/
   position: relative;
   
+}
+.back-color{
+  background-color:black;
+  margin:1px;
 }

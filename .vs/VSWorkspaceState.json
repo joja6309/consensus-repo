@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src"
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\cons-alg-modal"
   ],
-  "SelectedNode": "\\src\\index.html",
+  "SelectedNode": "\\src\\app\\cons-alg-modal\\cons-alg-modal.component.ts",
   "PreviewInSolutionExplorer": false
 }

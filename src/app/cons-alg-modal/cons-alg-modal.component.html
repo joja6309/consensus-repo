@@ -6,21 +6,23 @@
 </div>
 <div class="modal-body">
   <div class="row">
-    <div class="col-sm-6">
+    <app-slider #mySlider (rowChangeEmitter)="rowChangeHandler($event)"
+                (colChangeEmitter)="colChangeHandler($event)">
+    </app-slider>
+  </div>
+  <div class="row-cols">
+    <div class="col-shared col-left">
       <img class="img-size" [src]="name.url">
     </div>
-    <div class="col-sm-6">
-      <canvas #myCanvas id="cnv" width="300" height="300">
-      </canvas>
+    <div class="col-shared col-middle">
+      <canvas #myCanvas id="cnv" width="300" height="300"></canvas>
       <canvas #layout></canvas>
+    </div>
+    <div class="col-shared col-right">
+     
     </div>
   </div>
 </div>
 <div class="modal-footer cust-footer">
-  <div>
-    <app-slider #mySlider (rowChangeEmitter)="rowChangeHandler($event)" 
-                (colChangeEmitter)="colChangeHandler($event)">
-        </app-slider>
-      </div>
-      <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
-    </div>
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>

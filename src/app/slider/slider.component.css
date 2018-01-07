@@ -1,7 +1,8 @@
-.example-h2 {
-  
-  margin-bottom:45px;
-  font-size:15px;
+.example-h2 { 
+  /*margin-bottom:45px;*/
+  margin-left:15px;
+  font-size:18px;
+  margin-top:5px;
 }
 
 .example-section {

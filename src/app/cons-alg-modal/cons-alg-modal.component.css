@@ -16,3 +16,24 @@
   width:300px;
   height:300px;
 }
+.col-shared {
+  display: inline-table;
+  text-align: left;
+}
+.row-cols {
+  text-align: center;
+}
+.col-middle {
+  width: 550px;
+  height: 100%;
+}
+.col-left,
+.col-right {
+  width: 220px;
+  height: 100%;
+}
+
+.col-middle {
+  width: 550px;
+  height: 100%;
+}

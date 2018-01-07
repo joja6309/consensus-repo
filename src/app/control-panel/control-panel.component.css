@@ -1,0 +1,19 @@
+
+.row-cols {
+  max-width: 600px;
+}
+.col-shared {
+  display: inline-table;
+  text-align: left;
+}
+
+.col-left,
+.col-right {
+  width: 100px;
+  height: 100%;
+}
+
+.col-middle {
+  width: 220px;
+  height: 100%;
+}

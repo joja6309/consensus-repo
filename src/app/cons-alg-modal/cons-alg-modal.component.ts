@@ -11,8 +11,7 @@ export class NgbdModalContent implements OnInit{
   @ViewChild("myCanvas") myCanvas;
   @ViewChild("mySlider") mySlider: SliderComponent;
   @ViewChild('layout') canvasRef;
-  image = 'http://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png';
-
+  image: string = '';
   lineSep: number = 20;
   lineColor: string = "black";
   rectW: number = 100;
@@ -25,7 +24,7 @@ export class NgbdModalContent implements OnInit{
   context: CanvasRenderingContext2D;
   cnvEl: Element = null;
   ngAfterViewInit() {
-    this.drawGridLines();
+    
   }
   constructor(public activeModal: NgbActiveModal) { }
   ngOnInit() {
@@ -33,6 +32,10 @@ export class NgbdModalContent implements OnInit{
     this.iWidth = canvas.height;
     this.iHeight = canvas.width;
     this.context = canvas.getContext('2d');
+    this.drawImage();
+  }
+  drawImage() {
+    this.context.clearRect(0, 0, this.iWidth, this.iHeight);
     let source = new Image();
     source.crossOrigin = 'Anonymous';
     source.onload = () => {
@@ -40,6 +43,7 @@ export class NgbdModalContent implements OnInit{
       // canvas.width = source.width;
       this.context.drawImage(source, 0, 0);
       this.image = this.name.url;
+      this.drawGridLines();
 
     };
     source.src = this.name.url;
@@ -47,17 +51,16 @@ export class NgbdModalContent implements OnInit{
   
   rowChangeHandler(event: number) {
     this.rowCount = event;
-    this.drawGridLines();
+    this.drawImage();
   }
   colChangeHandler(event: number) {
     this.colCount = event;
-    this.drawGridLines();
+    this.drawImage();
   }
   
   drawGridLines() {
-
+    
     var ctx = this.context;
-    ctx.clearRect(0, 0, this.iWidth, this.iHeight)
     ctx.strokeStyle = this.lineColor;
     ctx.beginPath();
     var i, x, y, iCount = null;
@@ -78,14 +81,6 @@ export class NgbdModalContent implements OnInit{
       ctx.stroke();
     }
     ctx.closePath();
-
 }
 
-
-  tick() {
-    // requestAnimationFrame(() => {
-    //   this.tick()
-    // });
-   
-  }
 }

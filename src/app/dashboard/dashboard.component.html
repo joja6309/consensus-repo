@@ -1,47 +1,125 @@
-
 <div class="banner-area">
 
-
   <div class="container">
-    
+
     <h1 class="text-center text-white text-uppercase" style="margin-top:100px;">Application Dashboard</h1>
     <hr />
+    <!-- Stack the columns on mobile by making one full-width and the other half-width -->
 
-    
-
-    <div class="banner-content" style="padding-bottom:10px;">
-      <div class="col-md-4 pull-left">
-        <form-upload style="margin-bottom:10px;" ></form-upload> 
-        <app-dnd></app-dnd>
-        <button class="btn upload-btn" [disabled]="!uploadService.showUploadButton"
-        (click)="uploadService.upload()">Upload
-        </button>
-       
-      <!-- <div *ngIf="uploadService.showProgressBar" class="progress">
-        <div class="progress-bar progress-bar-info progress-bar-striped"
-             role="progressbar" attr.aria-valuenow="{{uploadService.progress.percentage}}"
-             aria-valuemin="0" aria-valuemax="100"
-             [ngStyle]="{width:uploadService.progress.percentage+'%'}">
-          {{uploadService.progress.percentage}}%
+    <div class="row">
+      <div class="col-sm-2" style="margin:5px;">
+        <app-image-select [imageSettings]="imageSettings"
+                          (imageSettingsChange)="onImageSettingsChange($event)">
+        </app-image-select>
+      </div>
+      <div class="col">
+        <div class="row">
+          <div class="col-sm-4">
+            <app-canvas-select [imageSettings]="imageSettings"
+                               [canvasSettings]="canvasSettings"
+                               [sizeSettings]="sizeSettings"
+                               [textSettings]="textSettings"
+                               [logoSettings]="logoSettings"></app-canvas-select>
+          </div>
+          <div class="col-sm-4">
+            <app-canvas-select [imageSettings]="imageSettings"
+                               [canvasSettings]="canvasSettings"
+                               [sizeSettings]="sizeSettings"
+                               [textSettings]="textSettings"
+                               [logoSettings]="logoSettings"></app-canvas-select>
+          </div>
         </div>
-      </div> -->
+        <div class="row">
+          <app-slider #mySlider
+                      (rowChangeEmitter)="rowChangeHandler($event)"
+                      (colChangeEmitter)="colChangeHandler($event)">
+          </app-slider>
 
+        </div>
       </div>
-      <div class="col-md-8 pull-right" style="margin-bottom:40px;">
-         
-        <app-image-display></app-image-display>
-        <button class="btn upload-btn" [disabled]="!imageSelected"
-         (click)="open()">Run Algorithm on this Image!
-      </button>
-      
-      </div>
-      </div>
-      <div class="col-md-12 scroll">
-         <a *ngFor="let img of images; let i = index" (click)="selectImg(i)">
-          <img class="img-size" [src]="img.url">
-        </a>
     </div>
+
   </div>
 </div>
 
 
+
+<!-- Sizes Component
+    <app-logo-select [logoSettings]='logoSettings'
+    (logoSettingsChange)="onLogoSettingsChange($event)"></app-logo-select>
+        <app-text-select [textSettings]="textSettings"
+    (textSettingsChange)="onTextSettingsChange($event)"></app-text-select>
+
+    -->
+<!--<app-control-panel label="Sizes">
+  <panel-body>
+  </panel-body>
+</app-control-panel>-->
+<!-- Filters Component -->
+<!--<app-control-panel label="Filters">
+    <panel-button>
+    </panel-button>
+    <panel-body>
+    </panel-body>
+</app-control-panel>-->
+<!-- Text Component -->
+<!--<app-control-panel label="Text">
+    <panel-body>
+    </panel-body>
+</app-control-panel>-->
+<!-- Logo Component -->
+<!--<app-control-panel label="Logo">
+    <panel-body>
+        <app-logo-select [logoSettings]='logoSettings' (logoSettingsChange)="onLogoSettingsChange($event)"></app-logo-select>
+    </panel-body>
+</app-control-panel>-->
+<!-- Download Button -->
+<!--<button class="btn btn-block btn-lg btn-core-cta text-center" (click)="onDownload()">Share & Download</button>-->
+<!--<app-edit-text [textSettings]="textSettings"></app-edit-text>-->
+<!--<div class="row">
+<div class="col-sm-2" style="margin:5px;">
+</div>
+<div class="col-sm-8">
+  <div class="col-xs-3" style="margin:10px;">
+  </div>
+  <div class="col-xs-3" style="margin:10px;">
+    <app-canvas-select [imageSettings]="imageSettings" [canvasSettings]="canvasSettings" [sizeSettings]="sizeSettings" [textSettings]="textSettings" [logoSettings]="logoSettings"></app-canvas-select>
+
+  </div>
+  <div class="row">
+
+
+  </div>
+
+
+</div>-->
+<!--<app-sizes-select [sizeSettings]="sizeSettings" (sizeSettingsChange)="onSizeSettingsChange($event)"></app-sizes-select>-->
+<!--<button class="btn btn-flat btn-xs pull-right" (click)="onFilterReset()">Reset</button>-->
+<!--<app-filters-select [filterSettings]="filterSettings" (filterSettingsChange)="onFilterSettingsChange($event)"></app-filters-select>-->
+<!--<div class="banner-content" style="padding-bottom:10px;">
+      <div class="col-md-4 pull-left">
+        <form-upload style="margin-bottom:10px;"></form-upload>
+        <app-dnd></app-dnd>
+        <button class="btn upload-btn" [disabled]="!uploadService.showUploadButton"
+                (click)="uploadService.upload()">
+          Upload
+        </button>
+
+      </div>
+    </div>
+    <div class="col-md-8 pull-right" style="margin-bottom:40px;">
+
+      <app-image-display></app-image-display>
+      <button class="btn upload-btn" [disabled]="!imageSelected"
+              (click)="open()">
+        Run Algorithm on this Image!
+      </button>
+
+    </div>
+  </div>
+  <div class="col-md-12 scroll">
+    <a *ngFor="let img of images; let i = index" (click)="selectImg(i)">
+      <img class="img-size" [src]="img.url">
+    </a>
+  </div>
+</div>-->
