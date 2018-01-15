@@ -1,29 +1,34 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation, Output } from '@angular/core';
+import { Component, OnInit, ViewChild, 
+  ViewEncapsulation, Output, Input, 
+  ViewContainerRef, ComponentFactory, ComponentFactoryResolver
+} from '@angular/core';
 import { UploadFileService } from '../upload-file.service';
 import { EditSettingsService } from '../edit-settings.service';
 import { ImageFilterService } from '../image-filter.service';
 import { GenerateImageService } from '../generate-image.service';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
-import { Image } from '../image.model';
+import { Image,ResponseImage } from '../image.model';
 import { Observable } from 'rxjs';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImageDisplayComponent } from '../image-display/image-display.component';
 import { NgbdModalContent } from '../cons-alg-modal/cons-alg-modal.component';
-
+import { CanvasSelectComponent } from '../canvas-select'
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   encapsulation: ViewEncapsulation.None,
-
   providers: [NgbCarouselConfig]
 })
 
 export class DashboardComponent implements OnInit {
-  @ViewChild('app-image-display') image_display;
+  @ViewChild("canvasContainer", { read: ViewContainerRef }) container;
+  componentRef: CanvasSelectComponent;
+  @ViewChild("canvasContainer2", { read: ViewContainerRef }) container2;
+  componentRef2: CanvasSelectComponent;
 
-
+  
   @Output() sizes: any;
   @Output() selectedSize: any;
   @Output() filters: any;
@@ -34,108 +39,68 @@ export class DashboardComponent implements OnInit {
   @Output() filterSettings: any;
   @Output() textSettings: any;
   @Output() logoSettings: any;
-  
-  public images;
+  @Output() colCount = 2;
+  @Output() rowCount = 2;
+  data: Object;
   simpleDrop: any = null;
   listTeamOne: Array<string> = [];
   listTeamTwo: Array<string> = [];
   imageSelected: boolean = false;
- 
+  images: any;
   
-   //private editSettingsService: EditSettingsService,
-   // private imageFilterService: ImageFilterService,
-   // private generateImageService: GenerateImageService
-  constructor(private uploadService: UploadFileService,
+  
+  
+  constructor(
+    private resolver: ComponentFactoryResolver,
+    private uploadService: UploadFileService,
     private config: NgbCarouselConfig,
     private modalService: NgbModal,
     private editSettingsService: EditSettingsService,
     private generateImageService: GenerateImageService,
     private imageFilterService: ImageFilterService
-   )
-    {
-        // customize default values of carousels used by this component tree
-        //config.interval = 10000;
-        config.wrap = true;
-        config.keyboard = true;
+  ) { 
+    
+   
+  }
+  createCanvasComponents() {
+    //this.container.clear();
+    
 
-     }
+    // this.componentRef.instance.output.subscribe(event => console.log(event));
 
-  ngOnInit() {
-    this.setImages();
-    //images
+  }
+   
+  ngAfterViewInit() {
+   
+
+  }
+  rowChangeHandler(event: number) {
+    this.rowCount = event;
+    this.canvasSettings.rowCount = event;
+    this.editSettingsService.updateCanvas();
+  }
+  colChangeHandler(event: number) {
+    this.colCount = event;
+    this.canvasSettings.colCount = event;
+    this.editSettingsService.updateCanvas();
+    
+  }
+
+  async ngOnInit() {
+    var resImages = await this.uploadService.getImages();
     this.imageSettings = {
       selectedImageUniqueId: 0,
-      images: [
-        {
-          url: "https://images.unsplash.com/photo-1460500063983-994d4c27756c?crop=entropy&fit=crop&fm=jpg&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80",
-          name: "Cool Beach",
-          author: "Michael Durana",
-          location: "Big Sur, United States",
-          tags: "water, ocean, rocks, nature, sky, sun",
-          uniqueId: 0
-        }, {
-          url: "https://images.unsplash.com/photo-1460378150801-e2c95cb65a50?crop=entropy&fit=crop&fm=jpg&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80",
-          name: "Snowscape",
-          author: "Joe Reed",
-          location: "Hole-in-the-Wall, Penrith, United Kingdom",
-          tags: "nature, mountains, snow, sky, cold, winter",
-          uniqueId: 1
-        }, {
-          url: "https://images.unsplash.com/photo-1458400411386-5ae465c4e57e?crop=entropy&fit=crop&fm=jpg&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80",
-          name: "Lift Chairs",
-          author: "Geoffrey Arduini",
-          location: "Morillon, France",
-          tags: "snow, winter, cold, nature, outside, chairs, ski, snowboard",
-          uniqueId: 2
-        }, {
-          url: "https://images.unsplash.com/photo-1452827073306-6e6e661baf57?crop=entropy&fit=crop&fm=jpg&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80",
-          name: "Flower Gift",
-          author: "Leonardo Wong",
-          location: "Singapore",
-          tags: "rose, gift, petal, flower, scent",
-          uniqueId: 3
-        }, {
-          url: "https://images.unsplash.com/photo-1452215199360-c16ba37005fe?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&fit=crop&s=ba433e209f134b4c8b2a7804a3db2b49",
-          name: "Mountains Backdrop",
-          author: "Caryle Tylkowski",
-          location: "Unknown",
-          tags: "mountains, sky, blue, rocky, nature",
-          uniqueId: 4
-        }, {
-          url: "https://images.unsplash.com/photo-1442551382982-e59a4efb3c86?crop=entropy&fit=crop&fm=jpg&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80",
-          name: "NY Skyline",
-          author: "Nirzar Pangarkar",
-          location: "New York, United States",
-          tags: "sky, skyline, new york, buildings, water",
-          uniqueId: 5
-        }, {
-          url: "https://images.unsplash.com/photo-1440613905118-99b921706b5c?crop=entropy&fit=crop&fm=jpg&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80",
-          name: "Bridge in City",
-          author: "valor kopeny",
-          location: "Dumbo , New York, USA",
-          tags: "city, bridge, outside, structures",
-          uniqueId: 6
-        }, {
-          url: "https://images.unsplash.com/photo-1423784346385-c1d4dac9893a?crop=entropy&fit=crop&fm=jpg&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80",
-          name: "iPhone Habit",
-          author: "Gilles Lambert",
-          location: "Unknown",
-          tags: "iphone, tech, habit, people, screen",
-          uniqueId: 7
-        }, {
-          url: "https://images.unsplash.com/reserve/imNop2O1Rit190cSkxXv_1-7069.jpg?crop=entropy&fit=crop&fm=jpg&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80",
-          name: "Flowers on Stand",
-          author: "Julia Janeta",
-          location: "Unknown",
-          tags: "rose, gift, petal, flower, scent, drawer, white",
-          uniqueId: 8
-        }],
-      filterQuery: ''
+      filterQuery: '',
+      images: resImages
     };
+   
 
-    //canvas
+
+    // canvas
     this.canvasSettings = {
-      downloadableImage: ''
+      downloadableImage: '',
+      rowCount:2,
+      colCount:2
     };
 
     //sizes
@@ -152,7 +117,7 @@ export class DashboardComponent implements OnInit {
           width: 300,
           height: 400
         },
-      
+
         {
           name: "Twitter and Facebook",
           width: 200,
@@ -251,7 +216,26 @@ export class DashboardComponent implements OnInit {
       size: 50,
       radius: 0
     };
-      
+  
+    const factory: ComponentFactory<CanvasSelectComponent> = this.resolver.resolveComponentFactory(CanvasSelectComponent);
+
+    this.componentRef = this.container.createComponent(factory);
+    this.componentRef2 = this.container.createComponent(factory);
+
+    this.componentRef.imageSettings = this.imageSettings;
+    this.componentRef.canvasSettings = this.canvasSettings;
+    this.componentRef.sizeSettings = this.sizeSettings;
+    this.componentRef.textSettings = this.textSettings;
+    this.componentRef.logoSettings = this.logoSettings;
+    this.componentRef.isGrid = false;
+
+    this.componentRef2.imageSettings = this.imageSettings;
+    this.componentRef2.canvasSettings = this.canvasSettings;
+    this.componentRef2.sizeSettings = this.sizeSettings;
+    this.componentRef2.textSettings = this.textSettings;
+    this.componentRef2.logoSettings = this.logoSettings;
+    this.componentRef2.isGrid = true;
+    
   }
   shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {
@@ -299,33 +283,72 @@ export class DashboardComponent implements OnInit {
   onDownload() {
     this.generateImageService.generateImage();
   }
-  open() {
-      console.log(1);
-    const modalRef = this.modalService.open(NgbdModalContent, { windowClass: 'modal-custom-lg' });
-    modalRef.componentInstance.name = this.uploadService.selectedImage;
-  }
  
-  selectImg(i)
-  {
-    console.log(i);
-    this.uploadService.imgSrc = 'url(' + this.images[i].url + ')'
-    this.uploadService.disText = null
-    this.imageSelected = true;
-    this.uploadService.selectedImage = this.images[i]
-    // this.image_display.changeClass()
-  }
-  setImages()
-  {
-    this.uploadService.getImages().subscribe(
-      // the first argument is a function which runs on success
-      data => { 
-          this.images = data
-          console.log(data);
-        },
-      // the second argument is a function which runs on error
-      err => console.error(err),
-      // the third argument is a function which runs on completion
-      () => console.log('done loading foods')
-    );
-  }
+  
 }
+// ,
+// images: [
+//   {
+//     url: "http://localhost:3000/photo_6.jpeg",
+//     name: "Cool Beach",
+//     author: "Michael Durana",
+//     location: "Big Sur, United States",
+//     tags: "water, ocean, rocks, nature, sky, sun",
+//     uniqueId: 0
+//   }, {
+//     url: "https://images.unsplash.com/photo-1460378150801-e2c95cb65a50?crop=entropy&fit=crop&fm=jpg&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80",
+//     name: "Snowscape",
+//     author: "Joe Reed",
+//     location: "Hole-in-the-Wall, Penrith, United Kingdom",
+//     tags: "nature, mountains, snow, sky, cold, winter",
+//     uniqueId: 1
+//   }, {
+//     url: "https://images.unsplash.com/photo-1458400411386-5ae465c4e57e?crop=entropy&fit=crop&fm=jpg&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80",
+//     name: "Lift Chairs",
+//     author: "Geoffrey Arduini",
+//     location: "Morillon, France",
+//     tags: "snow, winter, cold, nature, outside, chairs, ski, snowboard",
+//     uniqueId: 2
+//   }, {
+//     url: "https://images.unsplash.com/photo-1452827073306-6e6e661baf57?crop=entropy&fit=crop&fm=jpg&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80",
+//     name: "Flower Gift",
+//     author: "Leonardo Wong",
+//     location: "Singapore",
+//     tags: "rose, gift, petal, flower, scent",
+//     uniqueId: 3
+//   }, {
+//     url: "https://images.unsplash.com/photo-1452215199360-c16ba37005fe?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&fit=crop&s=ba433e209f134b4c8b2a7804a3db2b49",
+//     name: "Mountains Backdrop",
+//     author: "Caryle Tylkowski",
+//     location: "Unknown",
+//     tags: "mountains, sky, blue, rocky, nature",
+//     uniqueId: 4
+//   }, {
+//     url: "https://images.unsplash.com/photo-1442551382982-e59a4efb3c86?crop=entropy&fit=crop&fm=jpg&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80",
+//     name: "NY Skyline",
+//     author: "Nirzar Pangarkar",
+//     location: "New York, United States",
+//     tags: "sky, skyline, new york, buildings, water",
+//     uniqueId: 5
+//   }, {
+//     url: "https://images.unsplash.com/photo-1440613905118-99b921706b5c?crop=entropy&fit=crop&fm=jpg&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80",
+//     name: "Bridge in City",
+//     author: "valor kopeny",
+//     location: "Dumbo , New York, USA",
+//     tags: "city, bridge, outside, structures",
+//     uniqueId: 6
+//   }, {
+//     url: "https://images.unsplash.com/photo-1423784346385-c1d4dac9893a?crop=entropy&fit=crop&fm=jpg&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80",
+//     name: "iPhone Habit",
+//     author: "Gilles Lambert",
+//     location: "Unknown",
+//     tags: "iphone, tech, habit, people, screen",
+//     uniqueId: 7
+//   }, {
+//     url: "https://images.unsplash.com/reserve/imNop2O1Rit190cSkxXv_1-7069.jpg?crop=entropy&fit=crop&fm=jpg&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80",
+//     name: "Flowers on Stand",
+//     author: "Julia Janeta",
+//     location: "Unknown",
+//     tags: "rose, gift, petal, flower, scent, drawer, white",
+//     uniqueId: 8
+//   }]

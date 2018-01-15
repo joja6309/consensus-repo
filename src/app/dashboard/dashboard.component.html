@@ -15,18 +15,27 @@
       <div class="col">
         <div class="row">
           <div class="col-sm-4">
-            <app-canvas-select [imageSettings]="imageSettings"
+            <template #canvasContainer></template>
+            <!-- <app-canvas-select 
+            isGrid="false"
+            [imageSettings]="imageSettings"
                                [canvasSettings]="canvasSettings"
                                [sizeSettings]="sizeSettings"
                                [textSettings]="textSettings"
-                               [logoSettings]="logoSettings"></app-canvas-select>
+                               [logoSettings]="logoSettings">
+                                
+            </app-canvas-select> -->
           </div>
           <div class="col-sm-4">
-            <app-canvas-select [imageSettings]="imageSettings"
+            <template #canvasContainer2></template>
+            <!-- <app-canvas-select isGrid="true"
+            [imageSettings]="imageSettings"
                                [canvasSettings]="canvasSettings"
                                [sizeSettings]="sizeSettings"
                                [textSettings]="textSettings"
-                               [logoSettings]="logoSettings"></app-canvas-select>
+                               [logoSettings]="logoSettings">
+                                 
+            </app-canvas-select> -->
           </div>
         </div>
         <div class="row">

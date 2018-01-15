@@ -18,6 +18,8 @@ img {
 
 .image {
     margin: 0 0 10px;
+    height:100px;
+    width:100px;
 }
 
 .image-container {

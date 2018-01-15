@@ -19,7 +19,7 @@ import { SliderComponent } from './slider/slider.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UploadFileService } from './upload-file.service';
-import { CanvasSelectComponent } from './canvas-select'
+import { CanvasSelectComponent } from './canvas-select';
 import { SelectableDirective } from './selectable.directive'
 import { IndexOfPipe } from './shared/pipes/index-of.pipe'
 import { EditTextComponent } from './edit-text/edit-text.component'
@@ -36,6 +36,7 @@ import { EditSettingsService } from './edit-settings.service';
 import { ImageFilterService } from './image-filter.service';
 import { GenerateImageService } from './generate-image.service';
 import { ControlPanelComponent } from './control-panel'
+import { BackendService } from './backend.service';
 
 
 import {
@@ -78,8 +79,8 @@ import {
     BrowserAnimationsModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents: [NgbdModalContent],
-  providers: [UploadFileService, EditSettingsService, ImageFilterService, GenerateImageService],
+  entryComponents: [NgbdModalContent, CanvasSelectComponent],
+  providers: [UploadFileService, EditSettingsService, ImageFilterService, GenerateImageService,BackendService],
   //, EditSettingsService, ImageFilterService, GenerateImageService
   bootstrap: [AppComponent]                          
 })

@@ -28,7 +28,11 @@ export class ImageDisplayComponent implements OnInit {
         /* Center and scale the image nicely */
         'background-position': 'center',
         'background-repeat': 'no-repeat',
-        'background-size': 'cover'
+        'background-size': 'cover',
+        'height': '100px',
+        'width':'100px'
+
+
       };
       return styles 
     }  
