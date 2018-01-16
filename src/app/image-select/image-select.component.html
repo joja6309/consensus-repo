@@ -1,7 +1,11 @@
 <!--<input type="text" placeholder="Filter Images" value="{{imageSettings.filterQuery}}" (keyup)="onKeyUp($event)">-->
 <div class="image-list" id="style-1">
-    <div class="image-container" *ngFor="let img of (imageSettings.images | indexOf : ['name', 'tags'] : imageSettings.filterQuery);">
-        <img class="image pointer shadow" [src]="processImgUrl(img.url)" [alt]="img.name" [ngClass]="{ selected: img.uniqueId === imageSettings.selectedImageUniqueId }" selectable (isSelectedChange)="onIsSelectedChange(img.uniqueId)">
+    <div class="image-container"
+         *ngFor="let img of (imageSettings.images | indexOf : ['name', 'tags'] : imageSettings.filterQuery);">
+        <img class="image pointer shadow"
+             [src]="processImgUrl(img.url)"
+             [alt]="img.name" [ngClass]="{ selected: img.uniqueId === imageSettings.selectedImageUniqueId }"
+             selectable (isSelectedChange)="onIsSelectedChange(img.uniqueId)">
     </div>
 </div>
 

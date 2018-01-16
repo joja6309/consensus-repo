@@ -8,22 +8,22 @@ import { GenerateImageService } from '../generate-image.service';
 //import { OverlayTextsComponent } from './overlays/overlay-texts/overlay-texts.component';
 
 @Component({
-	moduleId: module.id,
-	selector: 'app-canvas-select',
-	templateUrl: 'canvas-select.component.html',
-	styleUrls: ['canvas-select.component.css'],
-	//directives: [OverlayLogoComponent, OverlayTextsComponent]
+  moduleId: module.id,
+  selector: 'app-canvas-select',
+  templateUrl: 'canvas-select.component.html',
+  styleUrls: ['canvas-select.component.css'],
+  //directives: [OverlayLogoComponent, OverlayTextsComponent]
 })
 export class CanvasSelectComponent implements AfterViewInit {
 
-	@ViewChild('photoCanvas') canvasArtboard: ElementRef;
-	@Input() gridId: string;
+  @ViewChild('photoCanvas') canvasArtboard: ElementRef;
+  @Input() gridId: string;
   @Input() isGrid: boolean;
-	@Input() canvasSettings: any;
-	@Input() imageSettings: any;
-	@Input() sizeSettings: any;
-	@Input() textSettings: any;
-	@Input() logoSettings: any;
+  @Input() canvasSettings: any;
+  @Input() imageSettings: any;
+  @Input() sizeSettings: any;
+  @Input() textSettings: any;
+  @Input() logoSettings: any;
   colCount = 2;
   rowCount = 2;
   rectW: number = 100;
@@ -32,25 +32,23 @@ export class CanvasSelectComponent implements AfterViewInit {
   lineColor: string = "black";
   rectColor: string = "#FF0000";
 
-	private ctx: CanvasRenderingContext2D;
+  private ctx: CanvasRenderingContext2D;
 
-	constructor(private editSettingsService: EditSettingsService,
-				private generateImageService: GenerateImageService,
-				private imageFilterService: ImageFilterService ) {}
+  constructor(private editSettingsService: EditSettingsService,
+    private generateImageService: GenerateImageService,
+    private imageFilterService: ImageFilterService) { }
 
-	ngAfterViewInit() {
-
-		//canvas context
-		this.ctx = this.canvasArtboard.nativeElement.getContext('2d');
-
-		//subscribe
-		this.editSettingsService.storeCanvas.subscribe(() => this.onUpdateCanvas());
-		this.imageFilterService.store.subscribe(() => this.onUpdateFilter());
-		this.generateImageService.store.subscribe(() => this.onGenerateDownloadableImage());
-	}
+  ngAfterViewInit() {
+    this.ctx = this.canvasArtboard.nativeElement.getContext('2d');
+    this.editSettingsService.storeCanvas.subscribe(() => this.onUpdateCanvas);
+  }
+  ngOnViewInit() {
+    
+  }
 
 	// load image into canvas
-	private onUpdateCanvas() {
+    private onUpdateCanvas() {
+      console.log(1)
 
 		//new image
 		let image = new Image();

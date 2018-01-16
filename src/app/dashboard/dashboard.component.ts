@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, 
-  ViewEncapsulation, Output, Input, 
-  ViewContainerRef, ComponentFactory, ComponentFactoryResolver
+  ViewEncapsulation, Output, Input,Directive,
+  ViewContainerRef, ComponentFactory, ComponentFactoryResolver,Injector
 } from '@angular/core';
 import { UploadFileService } from '../upload-file.service';
 import { EditSettingsService } from '../edit-settings.service';
@@ -14,6 +14,13 @@ import { ImageDisplayComponent } from '../image-display/image-display.component'
 import { NgbdModalContent } from '../cons-alg-modal/cons-alg-modal.component';
 import { CanvasSelectComponent } from '../canvas-select'
 
+//@Directive({
+//  selector: '[canv-anchor]',
+//})
+
+//export class CanvasAnchor {
+//  constructor(public viewContainerRef: ViewContainerRef) { }
+//}
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -23,12 +30,10 @@ import { CanvasSelectComponent } from '../canvas-select'
 })
 
 export class DashboardComponent implements OnInit {
-  @ViewChild("canvasContainer", { read: ViewContainerRef }) container;
-  componentRef: CanvasSelectComponent;
-  @ViewChild("canvasContainer2", { read: ViewContainerRef }) container2;
-  componentRef2: CanvasSelectComponent;
 
-  
+  //@ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef 
+
+  @Input() resImages: any;
   @Output() sizes: any;
   @Output() selectedSize: any;
   @Output() filters: any;
@@ -47,33 +52,43 @@ export class DashboardComponent implements OnInit {
   listTeamTwo: Array<string> = [];
   imageSelected: boolean = false;
   images: any;
-  
-  
-  
+  //viewContainerRef: any;
+
+
+
   constructor(
-    private resolver: ComponentFactoryResolver,
+    private resolver: ComponentFactoryResolver, private injector: Injector,
     private uploadService: UploadFileService,
     private config: NgbCarouselConfig,
     private modalService: NgbModal,
     private editSettingsService: EditSettingsService,
     private generateImageService: GenerateImageService,
     private imageFilterService: ImageFilterService
-  ) { 
-    
-   
+  ) {
+ 
   }
+  
   createCanvasComponents() {
-    //this.container.clear();
     
-
-    // this.componentRef.instance.output.subscribe(event => console.log(event));
 
   }
    
   ngAfterViewInit() {
-   
+    //setTimeout(() => {
+    //  let componentFactory = this.resolver.resolveComponentFactory(CanvasSelectComponent);
+    //  // we need to pass in the dependency injector
+    //  const sampleFactory = this.resolver.resolveComponentFactory(CanvasSelectComponent);
+    //  this.viewContainerRef = this.container.createComponent(sampleFactory);
+    //  this.viewContainerRef.instance.isGrid = false;
+    //  this.viewContainerRef.instance.canvasSettings = this.canvasSettings;
+    //  this.viewContainerRef.instance.sizeSettings = this.sizeSettings;
+    //  this.viewContainerRef.instance.textSettings = this.textSettings;
+    //  this.viewContainerRef.instance.logoSettings = this.logoSettings;
+    //  this.viewContainerRef.instance.imageSettings = this.imageSettings;
+    //}, 1);
 
   }
+  
   rowChangeHandler(event: number) {
     this.rowCount = event;
     this.canvasSettings.rowCount = event;
@@ -216,25 +231,7 @@ export class DashboardComponent implements OnInit {
       size: 50,
       radius: 0
     };
-  
-    const factory: ComponentFactory<CanvasSelectComponent> = this.resolver.resolveComponentFactory(CanvasSelectComponent);
 
-    this.componentRef = this.container.createComponent(factory);
-    this.componentRef2 = this.container.createComponent(factory);
-
-    this.componentRef.imageSettings = this.imageSettings;
-    this.componentRef.canvasSettings = this.canvasSettings;
-    this.componentRef.sizeSettings = this.sizeSettings;
-    this.componentRef.textSettings = this.textSettings;
-    this.componentRef.logoSettings = this.logoSettings;
-    this.componentRef.isGrid = false;
-
-    this.componentRef2.imageSettings = this.imageSettings;
-    this.componentRef2.canvasSettings = this.canvasSettings;
-    this.componentRef2.sizeSettings = this.sizeSettings;
-    this.componentRef2.textSettings = this.textSettings;
-    this.componentRef2.logoSettings = this.logoSettings;
-    this.componentRef2.isGrid = true;
     
   }
   shuffle(a) {
@@ -252,6 +249,8 @@ export class DashboardComponent implements OnInit {
 
   onImageSettingsChange(payload) {
     this.editSettingsService.updateCanvas();
+    console.log(payload)
+    //this.viewContainerRef.changeDetectorRef.detectChanges();
   }
 
   onCanvasReposition() {
@@ -260,6 +259,7 @@ export class DashboardComponent implements OnInit {
 
   onSizeSettingsChange(payload) {
     this.editSettingsService.updateCanvas();
+    
     this.editSettingsService.updateOverlays();
   }
 

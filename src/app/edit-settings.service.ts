@@ -6,6 +6,7 @@ import { EditableTextComponent } from './canvas-select/shared/overlays/overlay-t
 @Injectable()
 export class EditSettingsService {
 
+
 	//canvas observable
 	private serviceCanvas: any = new BehaviorSubject(null);
 	public storeCanvas: Observable<any> = this.serviceCanvas.asObservable();

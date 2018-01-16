@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output } from '@angular/core';
+import { UploadFileService } from '../upload-file.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  @Output() resImages: any; 
+  constructor(private uploadService: UploadFileService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.resImages = await this.uploadService.getImages();
+
   }
 
 }
