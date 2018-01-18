@@ -1976,7 +1976,7 @@ body:after {
   }
 }
 
-.p1-gradient-bg, .primary-btn:after, .banner-area, .single-feature .icon:after, .service-area, .story-area, .single-widget .icon:after {
+.p1-gradient-bg, .primary-btn:after, .single-feature .icon:after, .service-area, .story-area, .single-widget .icon:after {
   background-image: -moz-linear-gradient(0deg, #e66587 0%, #f09458 100%);
   background-image: -webkit-linear-gradient(0deg, #e66587 0%, #f09458 100%);
   background-image: -ms-linear-gradient(0deg, #e66587 0%, #f09458 100%);

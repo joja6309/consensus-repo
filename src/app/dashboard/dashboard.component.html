@@ -1,68 +1,33 @@
-<div class="banner-area">
+<div class="banner-area" >
 
-  <div class="container">
+  <div class="container" style="background-size:cover;">
 
     <h1 class="text-center text-white text-uppercase" style="margin-top:100px;">Application Dashboard</h1>
     <hr />
     <!-- Stack the columns on mobile by making one full-width and the other half-width -->
 
     <div class="row">
-      <div class="col-sm-2" style="margin:5px;">
+      <div class="col-lg-2" style="margin:5px;">
         <app-image-select [imageSettings]="imageSettings"
                           (imageSettingsChange)="onImageSettingsChange($event)">
         </app-image-select>
       </div>
       <div class="col">
-        <div class="row">
-          <div class="col-sm-4">
-            <app-canvas-select isGrid="true"
-                               [imageSettings]="imageSettings"
-                               [canvasSettings]="canvasSettings"
-                               [sizeSettings]="sizeSettings"
-                               [textSettings]="textSettings"
-                               [logoSettings]="logoSettings">
+        
+        <app-canvas-select [imageSettings]="imageSettings"
+                           [canvasSettings]="canvasSettings"
+                           [sizeSettings]="sizeSettings"
+                           [textSettings]="textSettings"
+                           [logoSettings]="logoSettings">
 
-            </app-canvas-select>
+        </app-canvas-select>
 
-            <!--<template #canvascontainer>
-        works
-      </template>-->
-            <!-- <app-canvas-select-->
-            <!--<template #canvasContainer>
-        isGrid="false"
-        [imageSettings]="imageSettings"
-        [canvasSettings]="canvasSettings"
-        [sizeSettings]="sizeSettings"
-        [textSettings]="textSettings"
-        [logoSettings]="logoSettings">
-                    <div #container></div>
-
-      </template>-->
-          </div>
-          <div class="col-sm-4">
-            <!--<template #canvasContainer2></template>-->
-            <app-canvas-select isGrid="false"
-                               [imageSettings]="imageSettings"
-                               [canvasSettings]="canvasSettings"
-                               [sizeSettings]="sizeSettings"
-                               [textSettings]="textSettings"
-                               [logoSettings]="logoSettings">
-
-            </app-canvas-select>
-          </div>
-        </div>
-        <div class="row">
-          <app-slider #mySlider
-                      (rowChangeEmitter)="rowChangeHandler($event)"
-                      (colChangeEmitter)="colChangeHandler($event)">
-          </app-slider>
-
-        </div>
       </div>
     </div>
 
   </div>
-</div>
+
+  </div>
 
 
 

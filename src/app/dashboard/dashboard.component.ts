@@ -1,26 +1,20 @@
-import { Component, OnInit, ViewChild, 
-  ViewEncapsulation, Output, Input,Directive,
-  ViewContainerRef, ComponentFactory, ComponentFactoryResolver,Injector
+import {
+  Component, OnInit, ViewChild,
+  ViewEncapsulation, Output, Input, Directive,
+  ViewContainerRef, ComponentFactory, ComponentFactoryResolver, Injector
 } from '@angular/core';
 import { UploadFileService } from '../upload-file.service';
 import { EditSettingsService } from '../edit-settings.service';
 import { ImageFilterService } from '../image-filter.service';
 import { GenerateImageService } from '../generate-image.service';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
-import { Image,ResponseImage } from '../image.model';
+import { Image, ResponseImage } from '../image.model';
 import { Observable } from 'rxjs';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImageDisplayComponent } from '../image-display/image-display.component';
 import { NgbdModalContent } from '../cons-alg-modal/cons-alg-modal.component';
 import { CanvasSelectComponent } from '../canvas-select'
 
-//@Directive({
-//  selector: '[canv-anchor]',
-//})
-
-//export class CanvasAnchor {
-//  constructor(public viewContainerRef: ViewContainerRef) { }
-//}
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -30,8 +24,6 @@ import { CanvasSelectComponent } from '../canvas-select'
 })
 
 export class DashboardComponent implements OnInit {
-
-  //@ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef 
 
   @Input() resImages: any;
   @Output() sizes: any;
@@ -52,10 +44,7 @@ export class DashboardComponent implements OnInit {
   listTeamTwo: Array<string> = [];
   imageSelected: boolean = false;
   images: any;
-  //viewContainerRef: any;
-
-
-
+  
   constructor(
     private resolver: ComponentFactoryResolver, private injector: Injector,
     private uploadService: UploadFileService,
@@ -65,14 +54,9 @@ export class DashboardComponent implements OnInit {
     private generateImageService: GenerateImageService,
     private imageFilterService: ImageFilterService
   ) {
- 
-  }
-  
-  createCanvasComponents() {
-    
 
   }
-   
+  
   ngAfterViewInit() {
     //setTimeout(() => {
     //  let componentFactory = this.resolver.resolveComponentFactory(CanvasSelectComponent);
@@ -86,20 +70,9 @@ export class DashboardComponent implements OnInit {
     //  this.viewContainerRef.instance.logoSettings = this.logoSettings;
     //  this.viewContainerRef.instance.imageSettings = this.imageSettings;
     //}, 1);
+  }
 
-  }
   
-  rowChangeHandler(event: number) {
-    this.rowCount = event;
-    this.canvasSettings.rowCount = event;
-    this.editSettingsService.updateCanvas();
-  }
-  colChangeHandler(event: number) {
-    this.colCount = event;
-    this.canvasSettings.colCount = event;
-    this.editSettingsService.updateCanvas();
-    
-  }
 
   async ngOnInit() {
     var resImages = await this.uploadService.getImages();
@@ -108,14 +81,14 @@ export class DashboardComponent implements OnInit {
       filterQuery: '',
       images: resImages
     };
-   
+
 
 
     // canvas
     this.canvasSettings = {
       downloadableImage: '',
-      rowCount:2,
-      colCount:2
+      rowCount: 2,
+      colCount: 2
     };
 
     //sizes
@@ -124,8 +97,8 @@ export class DashboardComponent implements OnInit {
       sizes: [
         {
           name: "Instagram",
-          width: 250,
-          height: 250,
+          width: 150,
+          height: 150,
         },
         {
           name: "Pinterest",
@@ -232,7 +205,7 @@ export class DashboardComponent implements OnInit {
       radius: 0
     };
 
-    
+
   }
   shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {
@@ -259,7 +232,7 @@ export class DashboardComponent implements OnInit {
 
   onSizeSettingsChange(payload) {
     this.editSettingsService.updateCanvas();
-    
+
     this.editSettingsService.updateOverlays();
   }
 
@@ -283,72 +256,6 @@ export class DashboardComponent implements OnInit {
   onDownload() {
     this.generateImageService.generateImage();
   }
- 
-  
+
+
 }
-// ,
-// images: [
-//   {
-//     url: "http://localhost:3000/photo_6.jpeg",
-//     name: "Cool Beach",
-//     author: "Michael Durana",
-//     location: "Big Sur, United States",
-//     tags: "water, ocean, rocks, nature, sky, sun",
-//     uniqueId: 0
-//   }, {
-//     url: "https://images.unsplash.com/photo-1460378150801-e2c95cb65a50?crop=entropy&fit=crop&fm=jpg&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80",
-//     name: "Snowscape",
-//     author: "Joe Reed",
-//     location: "Hole-in-the-Wall, Penrith, United Kingdom",
-//     tags: "nature, mountains, snow, sky, cold, winter",
-//     uniqueId: 1
-//   }, {
-//     url: "https://images.unsplash.com/photo-1458400411386-5ae465c4e57e?crop=entropy&fit=crop&fm=jpg&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80",
-//     name: "Lift Chairs",
-//     author: "Geoffrey Arduini",
-//     location: "Morillon, France",
-//     tags: "snow, winter, cold, nature, outside, chairs, ski, snowboard",
-//     uniqueId: 2
-//   }, {
-//     url: "https://images.unsplash.com/photo-1452827073306-6e6e661baf57?crop=entropy&fit=crop&fm=jpg&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80",
-//     name: "Flower Gift",
-//     author: "Leonardo Wong",
-//     location: "Singapore",
-//     tags: "rose, gift, petal, flower, scent",
-//     uniqueId: 3
-//   }, {
-//     url: "https://images.unsplash.com/photo-1452215199360-c16ba37005fe?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&fit=crop&s=ba433e209f134b4c8b2a7804a3db2b49",
-//     name: "Mountains Backdrop",
-//     author: "Caryle Tylkowski",
-//     location: "Unknown",
-//     tags: "mountains, sky, blue, rocky, nature",
-//     uniqueId: 4
-//   }, {
-//     url: "https://images.unsplash.com/photo-1442551382982-e59a4efb3c86?crop=entropy&fit=crop&fm=jpg&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80",
-//     name: "NY Skyline",
-//     author: "Nirzar Pangarkar",
-//     location: "New York, United States",
-//     tags: "sky, skyline, new york, buildings, water",
-//     uniqueId: 5
-//   }, {
-//     url: "https://images.unsplash.com/photo-1440613905118-99b921706b5c?crop=entropy&fit=crop&fm=jpg&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80",
-//     name: "Bridge in City",
-//     author: "valor kopeny",
-//     location: "Dumbo , New York, USA",
-//     tags: "city, bridge, outside, structures",
-//     uniqueId: 6
-//   }, {
-//     url: "https://images.unsplash.com/photo-1423784346385-c1d4dac9893a?crop=entropy&fit=crop&fm=jpg&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80",
-//     name: "iPhone Habit",
-//     author: "Gilles Lambert",
-//     location: "Unknown",
-//     tags: "iphone, tech, habit, people, screen",
-//     uniqueId: 7
-//   }, {
-//     url: "https://images.unsplash.com/reserve/imNop2O1Rit190cSkxXv_1-7069.jpg?crop=entropy&fit=crop&fm=jpg&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80",
-//     name: "Flowers on Stand",
-//     author: "Julia Janeta",
-//     location: "Unknown",
-//     tags: "rose, gift, petal, flower, scent, drawer, white",
-//     uniqueId: 8
-//   }]

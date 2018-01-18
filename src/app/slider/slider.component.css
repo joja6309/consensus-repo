@@ -5,6 +5,10 @@
   margin-top:5px;
 }
 
+.mat-slider:not(.mat-slider-disabled) .mat-slider-thumb
+{
+  transform: scale(.4);
+}
 .example-section {
   display: flex;
   align-content: center;

@@ -24,7 +24,8 @@ export class SliderComponent implements OnInit {
   autoTicks = false;
   disabled = false;
   invert = false;
- 
+  underlined = false;
+
   showTicks = true;
   step = 1;
   thumbLabel = false;

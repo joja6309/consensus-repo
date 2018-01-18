@@ -164,3 +164,10 @@ input[type=file] {
   background-color:black;
   margin:1px;
 }
+.banner-area {
+  /*background-image: -moz-linear-gradient(0deg, #e66587 0%, #f09458 100%);
+  background-image: -webkit-linear-gradient(0deg, #e66587 0%, #f09458 100%);
+  background-image: -ms-linear-gradient(0deg, #e66587 0%, #f09458 100%);*/
+  background-image: linear-gradient(0deg, #e66587 0%, #f09458 100%);
+  background-size:cover;
+}

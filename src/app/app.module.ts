@@ -57,7 +57,7 @@ import {
     NgbdModalContent,
     DashboardComponent,
     DetailsUploadComponent, CanvasSelectComponent, SelectableDirective
-    ,IndexOfPipe, ImageSelectComponent, LogoSelectComponent,
+    , IndexOfPipe, ImageSelectComponent, LogoSelectComponent,
     SizesSelectComponent, TextSelectComponent,
     EditableTextComponent, MoveClampedToParentDirective,
     OverlayLogoComponent, OverlayTextsComponent, ControlPanelComponent,
@@ -69,10 +69,10 @@ import {
     AppRoutingModule,
     HttpClientModule,
     DndModule.forRoot(),
-     NgbModule.forRoot(),
+    NgbModule.forRoot(),
     MatFormFieldModule,
     MatInputModule
-,
+    ,
     MatSliderModule,
     MatCardModule,
     //MatFormFieldControl,
@@ -80,8 +80,8 @@ import {
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [NgbdModalContent, CanvasSelectComponent],
-  providers: [UploadFileService, EditSettingsService, ImageFilterService, GenerateImageService,BackendService],
+  providers: [UploadFileService, EditSettingsService, ImageFilterService, GenerateImageService, BackendService],
   //, EditSettingsService, ImageFilterService, GenerateImageService
-  bootstrap: [AppComponent]                          
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

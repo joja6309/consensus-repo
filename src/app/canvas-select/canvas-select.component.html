@@ -1,9 +1,50 @@
-<div class="overlays-container">
-    <canvas #photoCanvas class="shadow"
-            width="{{sizeSettings.sizes[sizeSettings.selectedSizeIndex].width}}"
-            height="{{sizeSettings.sizes[sizeSettings.selectedSizeIndex].height}}"
-            (click)="onClearOverlaysSelection()">
-    </canvas>
-    <!--<app-overlay-logo [sizeSettings]="sizeSettings" [logoSettings]="logoSettings"></app-overlay-logo>-->
-    <!--<app-overlay-texts [sizeSettings]="sizeSettings" [textSettings]="textSettings"></app-overlay-texts>-->
-</div>
+
+    <div class="row">
+      <div class="col-lg-4">
+        
+          <div style="margin-bottom:10px;height:45%;">
+            <div #anchor1 id="anchor1" style="height:250px;width:250px;display: block;margin: 0 auto;" >
+
+            </div>
+
+
+          </div>
+            <app-slider #mySlider
+                        (rowChangeEmitter)="rowChangeHandler($event)"
+                        (colChangeEmitter)="colChangeHandler($event)">
+
+            </app-slider>
+          <label class="btn btn-default btn-style shadow" style="margin-top:10px;">
+            <!--Upload Image <input type="file" hidden>-->
+            Set Grid
+          </label>
+        
+        </div>
+        <div class="col" style="padding:30px;">
+          <div #anchor2 id="anchor2" class="shadow"style="height:100%;display: block;margin: 0 auto;" >
+
+          </div>
+        </div>
+      </div>
+    
+    
+
+  <!--<div *ngIf="show; then thenBlock; else elseBlock">this is ignored</div>
+  <canvas #canvas1 class="shadow"
+          width="{{sizeSettings.sizes[sizeSettings.selectedSizeIndex].width}}"
+          height="{{sizeSettings.sizes[sizeSettings.selectedSizeIndex].height}}"
+          (click)="onClearOverlaysSelection()"></canvas>
+  <canvas #canvas2 class="shadow"
+          width="{{sizeSettings.sizes[sizeSettings.selectedSizeIndex].width}}"
+          height="{{sizeSettings.sizes[sizeSettings.selectedSizeIndex].height}}"
+          (click)="onClearOverlaysSelection()"></canvas>
+  <button (click)="show = !show">{{show ? 'hide' : 'show'}}</button>
+  <button (click)="switchPrimary()">Switch Primary</button>
+  show = {{show}}
+  <br>
+
+  <ng-template #primaryBlock>Primary text to show</ng-template>
+  <ng-template #elseBlock>Alternate text while primary text is hidden</ng-template>-->
+  <!--<app-overlay-logo [sizeSettings]="sizeSettings" [logoSettings]="logoSettings"></app-overlay-logo>-->
+  <!--<app-overlay-texts [sizeSettings]="sizeSettings" [textSettings]="textSettings"></app-overlay-texts>-->
+

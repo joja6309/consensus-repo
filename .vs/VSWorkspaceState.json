@@ -3,8 +3,18 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\cons-alg-modal"
+    "\\src\\app\\canvas-select",
+    "\\src\\app\\canvas-select\\shared",
+    "\\src\\app\\canvas-select\\shared\\directives",
+    "\\src\\app\\canvas-select\\shared\\overlays",
+    "\\src\\app\\control-panel",
+    "\\src\\app\\details-upload",
+    "\\src\\app\\image-select",
+    "\\src\\app\\logo-select",
+    "\\src\\app\\shared",
+    "\\src\\app\\shared\\directives",
+    "\\src\\app\\sizes-select"
   ],
-  "SelectedNode": "\\src\\app\\cons-alg-modal\\cons-alg-modal.component.ts",
+  "SelectedNode": "\\src\\app\\canvas-select\\canvas-select.component.ts",
   "PreviewInSolutionExplorer": false
 }
