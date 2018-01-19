@@ -1,32 +1,36 @@
 
-    <div class="card shadow">
-      <div style="text-align:center;">
-        <h2 class="example-h2" style="margin-bottom:10px;">Grid Configuration</h2>
-        <mat-form-field class="example-margin" style="margin:5px;">
-          <input matInput type="number"
-                 placeholder="Rows"
-                 [(ngModel)]="row_value"
-                 (ngModelChange)="row_change($event)">
-        </mat-form-field>
-        <mat-slider class="example-margin"
-                    thumbLabel tickInterval="auto"
-                    [(ngModel)]="row_value"
-                    (ngModelChange)="row_change($event)"
-                    style="height:30px;">
-                   
-        </mat-slider>
-        <mat-form-field class="example-margin">
-          <input matInput type="number"
-                 placeholder="Columns"
-                 [(ngModel)]="column_value"
-                 (ngModelChange)="col_change($event)">
-        </mat-form-field>
-        <mat-slider class="example-margin"
-                    thumbLabel tickInterval="auto"
-                    [(ngModel)]="column_value"
-                    (ngModelChange)="col_change($event)">
-        </mat-slider>
+    <div class="card shadow btn-style" style="padding:4px;color:black;">
+      <div class="card shadow">
+        <div style="text-align:center;padding:5px;padding-bottom:10px;">
+          <h2 class="example-h2">Grid Configuration</h2>
+          <mat-slider class="example-margin"
+                      thumbLabel tickInterval="auto"
+                      [(ngModel)]="row_value"
+                      (ngModelChange)="row_change($event)"
+                      style="height:30px;">
+
+          </mat-slider>
+          <mat-form-field class="example-margin" style="margin:5px;">
+            <input matInput type="number"
+                   placeholder="Rows"
+                   [(ngModel)]="row_value"
+                   (ngModelChange)="row_change($event)">
+          </mat-form-field>
+          <mat-slider class="example-margin"
+                      thumbLabel tickInterval="auto"
+                      [(ngModel)]="column_value"
+                      (ngModelChange)="col_change($event)"
+                      style="height:30px;">
+          </mat-slider>
+          <mat-form-field class="example-margin" style="margin:5px;">
+            <input matInput type="number"
+                   placeholder="Columns"
+                   [(ngModel)]="column_value"
+                   (ngModelChange)="col_change($event)">
+          </mat-form-field>
+        </div>
       </div>
+     
      
      
 

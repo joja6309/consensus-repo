@@ -7,17 +7,30 @@
 
 .mat-slider:not(.mat-slider-disabled) .mat-slider-thumb
 {
-  transform: scale(.4);
+  transform: scale(.6);
 }
-.example-section {
-  display: flex;
-  align-content: center;
-  align-items: center;
-  height: 60px;
+ .mat-slider:not(.mat-slider-disabled) .mat-slider-thumb-label
+{
+  display:none;
+}
+.mat-form-field-underline
+{
+  display:none;
+}
+.mat-form-field-wrapper
+{
+  padding-bottom:0px;
+}
+.mat-form-field-infix
+{
+  padding:0px;
+ 
+
 }
 
+
 .example-margin {
-  margin: 0px;
+ margin-left:10px;
 }
 
 .mat-slider-horizontal {
@@ -25,7 +38,7 @@
 }
 
 .mat-slider-vertical {
-  height: 300px;
+  /*height: 300px;*/
 }
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 

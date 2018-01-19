@@ -38,10 +38,10 @@ import { GenerateImageService } from './generate-image.service';
 import { ControlPanelComponent } from './control-panel'
 import { BackendService } from './backend.service';
 
-
 import {
   MatCardModule, MatFormFieldModule, MatSliderModule, MatFormFieldControl, MatInputModule
 } from '@angular/material';
+import { SquareComponent } from './square/square.component';
 @NgModule({
   declarations: [
     SliderComponent,
@@ -60,7 +60,7 @@ import {
     , IndexOfPipe, ImageSelectComponent, LogoSelectComponent,
     SizesSelectComponent, TextSelectComponent,
     EditableTextComponent, MoveClampedToParentDirective,
-    OverlayLogoComponent, OverlayTextsComponent, ControlPanelComponent,
+    OverlayLogoComponent, OverlayTextsComponent, ControlPanelComponent, SquareComponent,
 
   ],
   imports: [

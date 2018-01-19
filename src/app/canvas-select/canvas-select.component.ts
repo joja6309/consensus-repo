@@ -62,7 +62,7 @@ export class CanvasSelectComponent implements AfterViewInit {
     let rec = this.anchorRef1.nativeElement.getBoundingClientRect();
 
     //rec = DOMRect {x: 429.5, y: 283, width: 283.328125, height: 143.59375, top: 283, … }
-    
+     
     this.c1h = this.anchorRef1.nativeElement.clientHeight;
     this.c1w = this.anchorRef1.nativeElement.clientWidth;
     this.canvas.width = this.c1w;
@@ -83,8 +83,8 @@ export class CanvasSelectComponent implements AfterViewInit {
     this.ctx2 = this.canvas.getContext('2d');
     this.c2h = this.anchorRef2.nativeElement.clientHeight;
     this.c2w = this.anchorRef2.nativeElement.clientWidth;
-    this.canvas.width = this.c2w - 1 
-    this.canvas.height = this.c2h - 1  
+    this.canvas.width = this.c2w - 1;
+    this.canvas.height = this.c2h;
     this.container.appendChild(this.canvas);
     console.log(this.c2h);
     console.log(this.c2w);
@@ -150,21 +150,20 @@ export class CanvasSelectComponent implements AfterViewInit {
       console.log(image)
       this.ctx.drawImage(image, 0, 0, image.width, image.height,0,0,this.c1w, this.c1h);
       this.ctx2.drawImage(image2, 0, 0, image2.width, image2.height, 0, 0, this.c2w, this.c2h);
-          this.drawGridLines(this.ctx2, this.canvasSettings.colCount, this.canvasSettings.rowCount, this.c2w, this.c2h);
+      this.drawGridLines(this.ctx2, this.canvasSettings.colCount, this.canvasSettings.rowCount, this.c2w, this.c2h);
 
 		}
    
 	}
     private drawGridLines(ctx, colCount, rowCount, iWidth, iHeight) {
-      console.log(1)
     
     ctx.strokeStyle = this.lineColor;
     ctx.beginPath();
     var i, x, y, iCount = null;
     var col_index = colCount - 1;
-    var col_sep = Math.floor(iWidth / colCount);
+    var col_sep = iWidth / colCount;
     var row_index = rowCount - 1;
-    var row_sep = Math.floor(iWidth / rowCount);
+    var row_sep = iWidth / rowCount;
     for (i = 1; i <= col_index; i++) {
       x = (i * col_sep);
       ctx.moveTo(x, 0);

@@ -29,8 +29,8 @@ export class SliderComponent implements OnInit {
   showTicks = true;
   step = 1;
   thumbLabel = false;
-  row_value = 0;
-  column_value = 0;
+  row_value = 8;
+  column_value = 8;
   vertical = false;
   get tickInterval(): number | 'auto' {
     return this.showTicks ? (this.autoTicks ? 'auto' : this._tickInterval) : 0;

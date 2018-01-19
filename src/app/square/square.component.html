@@ -1,0 +1,12 @@
+<!--<div class="tp-box" (click)="toggleFlip()" [@flipState]="flip">
+  <div class="tp-box__side tp-box__front">
+    Front
+  </div>
+  <div class="tp-box__side tp-box__back">
+    Back
+  </div>
+</div>-->
+<div class="masterpage" *ngFor="let x of masterPages" draggable [dragScope]="'masterpage'" [dragData]="x">
+  <canvas #myCanvas width="105" height="149" style="background:lightgray;"></canvas>
+</div>
+

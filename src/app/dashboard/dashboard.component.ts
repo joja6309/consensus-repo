@@ -87,8 +87,8 @@ export class DashboardComponent implements OnInit {
     // canvas
     this.canvasSettings = {
       downloadableImage: '',
-      rowCount: 2,
-      colCount: 2
+      rowCount: 8,
+      colCount: 8
     };
 
     //sizes

@@ -10,7 +10,7 @@ img {
 }
 .image-list {
     margin: 10px 0;
-    max-height: 300px;
+    max-height: 400px;
     overflow-y: scroll;
     width:120px;
     margin-left:10px;

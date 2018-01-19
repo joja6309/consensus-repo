@@ -1,33 +1,57 @@
-<div class="banner-area" >
+<div class="banner-area">
+    <!--<tr>
+    <app-square></app-square>
+    <app-square></app-square>
+    <app-square></app-square>
+  </tr>-->
+    <!--<tr>
+      <app-square></app-square>
+      <app-square></app-square>
+      <app-square></app-square>
+    </tr>
+    <tr>
+      <app-square></app-square>
+      <app-square></app-square>
+      <app-square></app-square>
+    </tr>
+    <tr>
+      <app-square></app-square>
+      <app-square></app-square>
 
-  <div class="container" style="background-size:cover;">
+    </tr>
+  </table>-->
 
-    <h1 class="text-center text-white text-uppercase" style="margin-top:100px;">Application Dashboard</h1>
-    <hr />
-    <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+    <app-square></app-square>
 
-    <div class="row">
-      <div class="col-lg-2" style="margin:5px;">
-        <app-image-select [imageSettings]="imageSettings"
-                          (imageSettingsChange)="onImageSettingsChange($event)">
-        </app-image-select>
+
+    <div class="container" style="background-size:cover;">
+
+      <h1 class="text-center text-white text-uppercase" style="margin-top:100px;">Application Dashboard</h1>
+      <hr />
+      <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+
+      <div class="row">
+        <div class="col-lg-2" style="margin:5px;">
+          <app-image-select [imageSettings]="imageSettings"
+                            (imageSettingsChange)="onImageSettingsChange($event)">
+          </app-image-select>
+        </div>
+        <div class="col">
+
+          <app-canvas-select [imageSettings]="imageSettings"
+                             [canvasSettings]="canvasSettings"
+                             [sizeSettings]="sizeSettings"
+                             [textSettings]="textSettings"
+                             [logoSettings]="logoSettings">
+
+          </app-canvas-select>
+
+        </div>
       </div>
-      <div class="col">
-        
-        <app-canvas-select [imageSettings]="imageSettings"
-                           [canvasSettings]="canvasSettings"
-                           [sizeSettings]="sizeSettings"
-                           [textSettings]="textSettings"
-                           [logoSettings]="logoSettings">
 
-        </app-canvas-select>
-
-      </div>
     </div>
 
-  </div>
-
-  </div>
+</div>
 
 
 
