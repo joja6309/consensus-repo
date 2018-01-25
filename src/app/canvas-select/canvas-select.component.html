@@ -13,15 +13,23 @@
 
         </app-slider>
         <hr>
-        <label class="btn btn-default btn-style shadow">
-          <!--Upload Image <input type="file" hidden>-->
+        <!-- (click)="setGrid($event.target) -->
+        <!-- <label id="set-grid-btn" class="btn btn-default btn-style shadow">
           Set Grid
-        </label>
+        </label> -->
+        <button (click)="showDialog = !showDialog" (click)="setGrid()"id="set-grid-btn" class="btn btn-default btn-style shadow">Set Grid</button>
+
+        <app-dialog [(visible)]="showDialog">
+          <h1>Hello World</h1>
+          <ng-template #anchor3 class="shadow" style="height:560px;width:560px;display:block;margin: 0 0;">
+          </ng-template>
+        </app-dialog>
 
       </div>
         <div class="col" style="padding:30px;">
-          <div #anchor2 id="anchor2" class="shadow"style="height:560px;width:560px;display: block;margin: 0 0;" >
-
+          <div #anchor2 id="anchor2" class="shadow" style="height:560px;width:560px;display:block;margin: 0 0;" >
+           <!--  [hidden]="true"> -->
+            
           </div>
         </div>
       </div>

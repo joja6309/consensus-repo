@@ -1,4 +1,8 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild,TemplateRef } from '@angular/core';
+import { AfterViewInit,
+ Component, ElementRef, Input, ViewChild, TemplateRef, ViewContainerRef,
+  ComponentFactory, ComponentFactoryResolver,Injector} from '@angular/core';
+import { SquareComponent } from '../square/square.component';
+
 import { UploadFileService } from '../upload-file.service';
 import { EditSettingsService } from '../edit-settings.service';
 import { ImageFilterService } from '../image-filter.service';
@@ -14,6 +18,8 @@ export class CanvasSelectComponent implements AfterViewInit {
 
   @ViewChild('anchor2') anchorRef2: ElementRef;
   @ViewChild('anchor1') anchorRef1: ElementRef;
+  @ViewChild('anchor3', { read: ViewContainerRef }) dynamicAnchor3: ViewContainerRef;
+
 
   
   canvas: HTMLCanvasElement;
@@ -39,62 +45,33 @@ export class CanvasSelectComponent implements AfterViewInit {
   private ctx: CanvasRenderingContext2D;
   private ctx2: CanvasRenderingContext2D;
 
+  
+
   private canvasId: string = 'canvas1';
   private canvasId2: string = 'canvas2';
 
-  private c1h: number = 0;
-  private c1w: number = 0;
+  private anchor1h: number = 0;
+  private anchor1w: number = 0;
 
-  private c2h: number = 0;
-  private c2w: number = 0;
+  private anchor2h: number = 0;
+  private anchor2w: number = 0;
+
+  gridSet: string = "false";
+
+  componentRefs: Array<any> = [];
+  private columnPoints: Array<number> = [];
+  private rowPoints: Array<number> = []; 
+
 
   constructor(private editSettingsService: EditSettingsService,
     private generateImageService: GenerateImageService,
-    private imageFilterService: ImageFilterService) {
+    private imageFilterService: ImageFilterService,
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private viewContainerRef: ViewContainerRef,
+    private injector: Injector
+
+  ) {
      
-  }
-  createCanvas() {
-    let sizeData = this.sizeSettings.sizes[this.sizeSettings.selectedSizeIndex];
-    this.container = document.getElementById('anchor1');
-    this.canvas = document.createElement('canvas');
-    this.canvas.id = this.canvasId;
-    this.ctx = this.canvas.getContext('2d');
-    let rec = this.anchorRef1.nativeElement.getBoundingClientRect();
-
-    //rec = DOMRect {x: 429.5, y: 283, width: 283.328125, height: 143.59375, top: 283, … }
-     
-    this.c1h = this.anchorRef1.nativeElement.clientHeight;
-    this.c1w = this.anchorRef1.nativeElement.clientWidth;
-    this.canvas.width = this.c1w;
-    this.canvas.height = this.c1h;
-    this.container.appendChild(this.canvas);
-    console.log(this.c1h);
-    console.log(this.c1w);
-    console.log(this.anchorRef1.nativeElement.style.width);
-    console.log(this.anchorRef1.nativeElement.style.height)
-    console.log('height---' + this.anchorRef1.nativeElement.offsetHeight);  //<<<===here
-    console.log('width---' + this.anchorRef1.nativeElement.offsetWidth);    //<<<===here
-
-    //class="shadow"
-
-    this.container = document.getElementById('anchor2');
-    this.canvas = document.createElement('canvas');
-    this.canvas.id = this.canvasId2;
-    this.ctx2 = this.canvas.getContext('2d');
-    this.c2h = this.anchorRef2.nativeElement.clientHeight;
-    this.c2w = this.anchorRef2.nativeElement.clientWidth;
-    this.canvas.width = this.c2w - 1;
-    this.canvas.height = this.c2h;
-    this.container.appendChild(this.canvas);
-    console.log(this.c2h);
-    console.log(this.c2w);
-    console.log(this.anchorRef2.nativeElement);
-
-    console.log('height---' + this.anchorRef2.nativeElement.clientHeight);  //<<<===here
-    console.log('width---' + this.anchorRef2.nativeElement.clientWidth);    //<<<===here
-
-
-
   }
   rowChangeHandler(event: number) {
     this.rowCount = event;
@@ -107,18 +84,44 @@ export class CanvasSelectComponent implements AfterViewInit {
     this.editSettingsService.updateCanvas();
 
   }
+  setCanvas1() {
+    this.container = document.getElementById("anchor1");
+    this.canvas = document.createElement('canvas');
+    this.canvas.id = 'canvas1';
+    this.ctx = this.canvas.getContext('2d');
+    this.canvas.width = this.anchorRef1.nativeElement.clientHeight;
+    this.canvas.height = this.anchorRef1.nativeElement.clientWidth;
+    this.container.appendChild(this.canvas);
+
+  }
+  setCanvas2() {
+    this.container = document.getElementById("anchor2");
+    this.canvas = document.createElement('canvas');
+    this.canvas.id = 'canvas2';
+    this.ctx2 = this.canvas.getContext('2d');
+    this.canvas.width = this.anchorRef2.nativeElement.clientHeight;
+    this.canvas.height = this.anchorRef2.nativeElement.clientWidth;
+    this.container.appendChild(this.canvas);
+
+  }
   ngAfterViewInit() {
 
-    
-    this.createCanvas()
-
+    let sizeData = this.sizeSettings.sizes[this.sizeSettings.selectedSizeIndex];
+    this.anchor1h = this.anchorRef1.nativeElement.clientHeight;
+    this.anchor1w = this.anchorRef1.nativeElement.clientWidth;
+    this.anchor2h = this.anchorRef2.nativeElement.clientHeight;
+    this.anchor2w = this.anchorRef2.nativeElement.clientWidth;
+    this.setCanvas1();
+    this.setCanvas2();
     //subscribe
     this.editSettingsService.storeCanvas.subscribe(() => this.onUpdateCanvas());
     this.imageFilterService.store.subscribe(() => this.onUpdateFilter());
     //this.generateImageService.store.subscribe(() => this.onGenerateDownloadableImage());
 
   }
-  ngOnInit() {
+  
+  OnInit() {
+    
 
   }
 
@@ -136,25 +139,44 @@ export class CanvasSelectComponent implements AfterViewInit {
     image.crossOrigin = "Anonymous";
     image2.crossOrigin = "Anonymous";
     
-    //ctx.drawImage(img, 0, 0, img.width, img.height,     // source rectangle
-     // 0, 0, canvas.width, canvas.height); // destination rectangle
-		//clean canvas
-    this.ctx.clearRect(0, 0, this.c1w, this.c1h);
-    this.ctx2.clearRect(0, 0, this.c2w, this.c2h);
+    this.ctx.clearRect(0, 0, this.anchor1w, this.anchor1h);
+    this.ctx2.clearRect(0, 0, this.anchor2w, this.anchor2h);
 
-		//provide imageFilterService with a new canvas
-		//this.imageFilterService.updateCanvasReference(this.canvasArtboard.nativeElement);
-
-		//update canvas
     image.onload = () => {
-      console.log(image)
-      this.ctx.drawImage(image, 0, 0, image.width, image.height,0,0,this.c1w, this.c1h);
-      this.ctx2.drawImage(image2, 0, 0, image2.width, image2.height, 0, 0, this.c2w, this.c2h);
-      this.drawGridLines(this.ctx2, this.canvasSettings.colCount, this.canvasSettings.rowCount, this.c2w, this.c2h);
+        
+      this.ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, this.anchor1w, this.anchor1h);
+      this.ctx2.drawImage(image2, 0, 0, image2.width, image2.height, 0, 0, this.anchor2h, this.anchor2w);
+      this.drawGridLines(this.ctx2, this.canvasSettings.colCount, this.canvasSettings.rowCount, this.anchor2h, this.anchor2w);
 
 		}
    
 	}
+  
+  private setGrid() {
+    
+    for(let  col in this.columnPoints)
+    {
+      for(let row in this.rowPoints)
+      {
+        const factory = this.componentFactoryResolver.resolveComponentFactory(SquareComponent);
+        factory.create(this.injector);
+        const ref = this.dynamicAnchor3.createComponent(factory);
+        ref.instance.height = 100;
+        ref.instance.width = 100;
+        ref.instance.originalCtx = this.ctx2;
+        ref.instance.colPnt = col;
+        ref.instance.rowPnt = row;
+
+        // ref.injector.get.
+        ref.changeDetectorRef.detectChanges();
+        this.componentRefs.concat(ref);
+
+      }
+    }
+      
+    
+   
+  }
     private drawGridLines(ctx, colCount, rowCount, iWidth, iHeight) {
     
     ctx.strokeStyle = this.lineColor;
@@ -166,12 +188,14 @@ export class CanvasSelectComponent implements AfterViewInit {
     var row_sep = iWidth / rowCount;
     for (i = 1; i <= col_index; i++) {
       x = (i * col_sep);
+      this.columnPoints.concat(x);
       ctx.moveTo(x, 0);
       ctx.lineTo(x,iHeight);
       ctx.stroke();
     }
     for (i = 1; i <= row_index; i++) {
       y = (i * row_sep);
+      this.rowPoints.concat(y);
       ctx.moveTo(0, y);
       ctx.lineTo(iWidth, y);
       ctx.stroke();

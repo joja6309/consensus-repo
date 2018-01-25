@@ -1,5 +1,4 @@
-import { ElementRef,ViewChildren,Component, OnInit, trigger, state, style, transition, animate } from '@angular/core';
-
+import { ElementRef, ViewChild, Component, ViewContainerRef , OnInit, trigger, state, style, transition, animate } from '@angular/core';
 @Component({
   selector: 'app-square',
   templateUrl: './square.component.html',
@@ -18,93 +17,61 @@ import { ElementRef,ViewChildren,Component, OnInit, trigger, state, style, trans
     ])
   ]
 })
+
 export class SquareComponent implements OnInit {
-  @ViewChildren('myCanvas') myCanvas: ElementRef;
-  private context: CanvasRenderingContext2D;
-  private count: number = 0;
+  // private context: CanvasRenderingContext2D;
+  // private count: number = 0;
   flip: string = 'inactive';
-  constructor() { }
+  public colPnt: number; 
+  public rowPnt: number;
+  public width: number;
+  public height: number;
+  @ViewChild('backAnchor') backRef: ElementRef;
+  //@ViewChild('canvasAnchor', { read: ViewContainerRef }) canvasRef: ViewContainerRef;
+  public originalCtx: CanvasRenderingContext2D; 
+
+
+  constructor(private elRef: ElementRef) 
+  { 
+   
+  }
 
   toggleFlip() {
     this.flip = (this.flip == 'inactive') ? 'active' : 'inactive';
   }
-  public masterPages = [{
-    areas: [
-      {
-        type: "FlowArea",
-        width: "183.0",
-        x: "12.0",
-        y: "40.0",
-        id: "FAR.1",
-        height: "237.0"
-      },
-      {
-        type: "StaticArea",
-        width: "210.0",
-        x: "0.0",
-        y: "7.0",
-        id: "SAR.2",
-        height: "25.0"
-      },
-      {
-        type: "StaticArea",
-        width: "210.0",
-        x: "0.0",
-        y: "282.0",
-        id: "SAR.1",
-        height: "15.0"
-      },
-      {
-        type: "StaticArea",
-        width: "2.0",
-        x: "6.0",
-        y: "26.0",
-        id: "SAR.3",
-        height: "256.0"
-      }
-    ]
-  },
-  {
-    areas: [
-      {
-        type: "FlowArea",
-        width: "183.0",
-        x: "12.0",
-        y: "13.25",
-        id: "FAR.1",
-        height: "265.0"
-      },
-      {
-        type: "StaticArea",
-        width: "210.0",
-        x: "0.0",
-        y: "282.0",
-        id: "SAR.1",
-        height: "15.0"
-      }
-    ]
-  }
-  ];
+
   ngOnInit() {
   }
+   // Start at 10 pixels from the left and the top of the image (crop), 10, 10,
+   //  o----
+   //
+   //
+     // "Get" a `80 * 30` (w * h) area from the source image (crop), 80, 30,
+    // Place the result at 0, 0 in the canvas,   0, 0, 
+     // With as width / height: 160 * 60 (scale)    160, 60); 
+     // -> | -> | -> 
+     // v | v | v 
   ngAfterViewInit() {
-    let canvas = this.myCanvas.nativeElement;
-    //let canvas = this.myCanvas.toArray()[i].nativeElement;
-    //https://plnkr.co/edit/RZ1v9M?p=preview
-
-    this.context = canvas.getContext("2d");
-    this.tick(this.masterPages);
+    let canvas = document.createElement('canvas');
+    console.log(this.colPnt);
+    console.log(this.rowPnt);
+    console.log(this.height);
+    console.log(this.width);
+    console.log(this.originalCtx);
+    // let back = document.createElement('div');
+    //back.style('tp-box__side');
+    // back.classList.add('tp-box__side');
+    // back.classList.add('tp-box__back');
+    this.backRef.nativeElement.appendChild(canvas);
+    // this.backRef.nativeElement.appendChild('div')
+    // this.backRef.nativeElement.appendChild('canvas');
+    // <!-- < div class="tp-box__side tp-box__back" >
+    //   </div> -->
+    
+    
   }
 
-  tick(masterPages) {
-    var ctx = this.context;
-    ctx.clearRect(0, 0, 150, 150);
-    for (let j = 0; j < this.masterPages[this.count].areas.length; j++) {
-      ctx.fillStyle = this.masterPages[this.count].areas[j].type;
-      ctx.fillRect(masterPages[this.count].areas[j].x / 2, masterPages[this.count].areas[j].y / 2, masterPages[this.count].areas[j].width / 2, masterPages[this.count].areas[j].height / 2);
-    }
-    this.count = this.count + 1;
-  }
+  
 
 }
 

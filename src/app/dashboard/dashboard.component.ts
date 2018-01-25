@@ -14,6 +14,7 @@ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImageDisplayComponent } from '../image-display/image-display.component';
 import { NgbdModalContent } from '../cons-alg-modal/cons-alg-modal.component';
 import { CanvasSelectComponent } from '../canvas-select'
+import { SquareComponent } from '../square/square.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -44,12 +45,17 @@ export class DashboardComponent implements OnInit {
   listTeamTwo: Array<string> = [];
   imageSelected: boolean = false;
   images: any;
+  componentRefs: Array<any> = [];
+
+
   
   constructor(
-    private resolver: ComponentFactoryResolver, private injector: Injector,
+    private componentFactoryResolver: ComponentFactoryResolver, 
+    private injector: Injector,
     private uploadService: UploadFileService,
-    private config: NgbCarouselConfig,
-    private modalService: NgbModal,
+    private viewContainerRef: ViewContainerRef,
+    // private config: NgbCarouselConfig,
+    // private modalService: NgbModal,
     private editSettingsService: EditSettingsService,
     private generateImageService: GenerateImageService,
     private imageFilterService: ImageFilterService
@@ -58,18 +64,8 @@ export class DashboardComponent implements OnInit {
   }
   
   ngAfterViewInit() {
-    //setTimeout(() => {
-    //  let componentFactory = this.resolver.resolveComponentFactory(CanvasSelectComponent);
-    //  // we need to pass in the dependency injector
-    //  const sampleFactory = this.resolver.resolveComponentFactory(CanvasSelectComponent);
-    //  this.viewContainerRef = this.container.createComponent(sampleFactory);
-    //  this.viewContainerRef.instance.isGrid = false;
-    //  this.viewContainerRef.instance.canvasSettings = this.canvasSettings;
-    //  this.viewContainerRef.instance.sizeSettings = this.sizeSettings;
-    //  this.viewContainerRef.instance.textSettings = this.textSettings;
-    //  this.viewContainerRef.instance.logoSettings = this.logoSettings;
-    //  this.viewContainerRef.instance.imageSettings = this.imageSettings;
-    //}, 1);
+    
+   
   }
 
   

@@ -37,13 +37,16 @@ import { ImageFilterService } from './image-filter.service';
 import { GenerateImageService } from './generate-image.service';
 import { ControlPanelComponent } from './control-panel'
 import { BackendService } from './backend.service';
+import { SquareComponent } from './square/square.component';
 
 import {
   MatCardModule, MatFormFieldModule, MatSliderModule, MatFormFieldControl, MatInputModule
 } from '@angular/material';
-import { SquareComponent } from './square/square.component';
+import { DialogComponent } from './dialog/dialog.component';
+
 @NgModule({
   declarations: [
+  DialogComponent,
     SliderComponent,
     AppComponent,
     HomeComponent,
@@ -60,7 +63,7 @@ import { SquareComponent } from './square/square.component';
     , IndexOfPipe, ImageSelectComponent, LogoSelectComponent,
     SizesSelectComponent, TextSelectComponent,
     EditableTextComponent, MoveClampedToParentDirective,
-    OverlayLogoComponent, OverlayTextsComponent, ControlPanelComponent, SquareComponent,
+    OverlayLogoComponent, OverlayTextsComponent, ControlPanelComponent, SquareComponent
 
   ],
   imports: [
@@ -79,7 +82,7 @@ import { SquareComponent } from './square/square.component';
     BrowserAnimationsModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents: [NgbdModalContent, CanvasSelectComponent],
+  entryComponents: [NgbdModalContent, CanvasSelectComponent,SquareComponent],
   providers: [UploadFileService, EditSettingsService, ImageFilterService, GenerateImageService, BackendService],
   //, EditSettingsService, ImageFilterService, GenerateImageService
   bootstrap: [AppComponent]

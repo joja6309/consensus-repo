@@ -13,8 +13,9 @@ export class BackendService {
   ngOnInit() {
 
   }
-
-
+  private crntContext = CanvasRenderingContext2D;
+  private colPoint: number;
+  private rowPoints: number; 
   constructor(private http: HttpClient) {
   }
   getImages() {
